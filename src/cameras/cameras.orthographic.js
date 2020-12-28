@@ -1,6 +1,8 @@
 import Intersections from '../core/core.intersections';
 import Validators from '../core/core.validators';
 
+import * as THREE from "three";
+
 /**
  * Orthographic camera from THREE.JS with some extra convenience
  * functionalities.
@@ -12,7 +14,7 @@ import Validators from '../core/core.validators';
  * @module cameras/orthographic
  */
 
-const camerasOrthographic = (three = window.THREE) => {
+const camerasOrthographic = (three = THREE) => {
   if (three === undefined || three.OrthographicCamera === undefined) {
     return null;
   }

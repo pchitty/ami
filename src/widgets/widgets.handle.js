@@ -1,10 +1,12 @@
 import { widgetsBase } from './widgets.base';
 import CoreIntersections from '../core/core.intersections';
 
+import * as THREE from "three";
+
 /**
  * @module widgets/handle
  */
-const widgetsHandle = (three = window.THREE) => {
+const widgetsHandle = (three = THREE) => {
   if (three === undefined || three.Object3D === undefined) {
     return null;
   }

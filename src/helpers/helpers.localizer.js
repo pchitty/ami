@@ -3,10 +3,12 @@ import ShadersUniform from '../shaders/shaders.localizer.uniform';
 import ShadersVertex from '../shaders/shaders.localizer.vertex';
 import ShadersFragment from '../shaders/shaders.localizer.fragment';
 
+import * as THREE from "three";
+
 /**
  * @module helpers/localizer
  */
-const helpersLocalizer = (three = window.THREE) => {
+const helpersLocalizer = (three = THREE) => {
   if (three === undefined || three.Object3D === undefined) {
     return null;
   }

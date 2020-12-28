@@ -5,6 +5,7 @@
  * @author WestLangley / http://github.com/WestLangley
  * @author erich666 / http://erichaines.com
  */
+import * as THREE from "three";
 
 // This set of controls performs orbiting, dollying (zooming), and panning.
 // Unlike TrackballControls, it maintains the "up" direction object.up (+Y by default).
@@ -15,7 +16,7 @@
 
 // adapted from https://github.com/mrdoob/three.js/blob/dev/examples/jsm/controls/OrbitControls.js
 
-const orbit = (three = window.THREE) => {
+const orbit = (three = THREE) => {
     if (three === undefined || three.EventDispatcher === undefined) {
       return null;
     }

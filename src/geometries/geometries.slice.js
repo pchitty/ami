@@ -41,8 +41,9 @@ import coreUtils from '../core/core.utils';
  *  let slice = new THREE.Mesh(sliceGeometry, sliceMaterial);
  *  scene.add(slice);
  */
+import * as THREE from "three";
 
-const geometriesSlice = (three = window.THREE) => {
+const geometriesSlice = (three = THREE) => {
   if (three === undefined || three.ShapeBufferGeometry === undefined) {
     return null;
   }
@@ -109,7 +110,7 @@ const geometriesSlice = (three = window.THREE) => {
       this.type = 'SliceBufferGeometry';
 
       // update real position of each vertex! (not in 2d)
-      this.setAttribute( 'position', new three.Float32BufferAttribute( positions, 3 ) );
+      this.setAttribute('position', new three.Float32BufferAttribute(positions, 3));
       this.vertices = points; // legacy code to compute normals int he SliceHelper
     }
   };

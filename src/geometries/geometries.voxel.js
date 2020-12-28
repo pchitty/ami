@@ -2,8 +2,9 @@
  *
  * @module geometries/voxel
  */
+import * as THREE from "three";
 
-const geometriesVoxel = (three = window.THREE) => {
+const geometriesVoxel = (three = THREE) => {
   if (three === undefined || three.BoxGeometry === undefined) {
     return null;
   }

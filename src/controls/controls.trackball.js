@@ -5,8 +5,9 @@
  * @author Simone Manini / http://daron1337.github.io
  * @author Luca Antiga  / http://lantiga.github.io
  */
+import * as THREE from "three";
 
-const trackball = (three = window.THREE) => {
+const trackball = (three = THREE) => {
   if (three === undefined || three.EventDispatcher === undefined) {
     return null;
   }

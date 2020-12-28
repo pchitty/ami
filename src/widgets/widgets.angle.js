@@ -1,10 +1,12 @@
 import { widgetsBase } from './widgets.base';
 import { widgetsHandle as widgetsHandleFactory } from './widgets.handle';
 
+import * as THREE from "three";
+
 /**
  * @module widgets/angle
  */
-const widgetsAngle = (three = window.THREE) => {
+const widgetsAngle = (three = THREE) => {
   if (three === undefined || three.Object3D === undefined) {
     return null;
   }
@@ -136,7 +138,7 @@ const widgetsAngle = (three = window.THREE) => {
         this._moveHandle.onMove(evt, true);
 
         if (this._moving) {
-          this._handles.slice(0, -1).forEach(handle => {
+          this._handles.slice(0, -1).forEach((handle) => {
             handle.worldPosition.add(this._moveHandle.worldPosition.clone().sub(prevPosition));
           });
         }
@@ -242,7 +244,7 @@ const widgetsAngle = (three = window.THREE) => {
       this._line2.style.display = 'none';
       this._label.style.display = 'none';
 
-      this._handles.forEach(elem => elem.hideDOM());
+      this._handles.forEach((elem) => elem.hideDOM());
     }
 
     showDOM() {
@@ -299,9 +301,7 @@ const widgetsAngle = (three = window.THREE) => {
         this._handles[0].screenPosition
       );
 
-      this._line.style.transform = `translate3D(${lineData.transformX}px, ${
-        lineData.transformY
-      }px, 0)
+      this._line.style.transform = `translate3D(${lineData.transformX}px, ${lineData.transformY}px, 0)
             rotate(${lineData.transformAngle}rad)`;
       this._line.style.width = lineData.length + 'px';
 
@@ -311,20 +311,14 @@ const widgetsAngle = (three = window.THREE) => {
         this._handles[2].screenPosition
       );
 
-      this._line2.style.transform = `translate3D(${line2Data.transformX}px, ${
-        line2Data.transformY
-      }px, 0)
+      this._line2.style.transform = `translate3D(${line2Data.transformX}px, ${line2Data.transformY}px, 0)
             rotate(${line2Data.transformAngle}rad)`;
       this._line2.style.width = line2Data.length + 'px';
 
       // update angle and label
       this._label.innerHTML = `${this._opangle.toFixed(2)}&deg;`;
 
-      let paddingNormVector = lineData.line
-        .clone()
-        .add(line2Data.line)
-        .normalize()
-        .negate();
+      let paddingNormVector = lineData.line.clone().add(line2Data.line).normalize().negate();
       let normAngle = paddingNormVector.angleTo(new three.Vector3(1, 0, 0));
 
       if (normAngle > Math.PI / 2) {
@@ -352,7 +346,7 @@ const widgetsAngle = (three = window.THREE) => {
     free() {
       this.removeEventListeners();
 
-      this._handles.forEach(h => {
+      this._handles.forEach((h) => {
         this.remove(h);
         h.free();
       });
@@ -390,7 +384,7 @@ const widgetsAngle = (three = window.THREE) => {
 
     set targetMesh(targetMesh) {
       this._targetMesh = targetMesh;
-      this._handles.forEach(elem => (elem.targetMesh = targetMesh));
+      this._handles.forEach((elem) => (elem.targetMesh = targetMesh));
       this.update();
     }
 

@@ -62,7 +62,7 @@
     "nifti-reader-js": "v0.5.3",
     "nrrd-js": "^0.2.1",
     "pako": "1.0.1",
-    "three": "latest"
+    "three": "^0.122.0"
   },
   "scripts": {
     "precommit": "lint-staged",
@@ -131,6 +131,9 @@
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5",
     "webpack-watch-livereload-plugin": "^0.0.1"
+  },
+  "peerDependencies": {
+    "three": ">=0.122.0"
   },
   "engines": {
     "node": ">=6.9.0"

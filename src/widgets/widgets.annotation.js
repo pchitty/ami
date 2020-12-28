@@ -1,11 +1,13 @@
 import { widgetsBase } from './widgets.base';
 import { widgetsHandle as widgetsHandleFactory } from './widgets.handle';
 
+import * as THREE from "three";
+
 /**
  * @module widgets/annotation
  * @todo: add option to show only label (without mesh, dots and lines)
  */
-const widgetsAnnotation = (three = window.THREE) => {
+const widgetsAnnotation = (three = THREE) => {
   if (three === undefined || three.Object3D === undefined) {
     return null;
   }
@@ -205,10 +207,12 @@ const widgetsAnnotation = (three = window.THREE) => {
       this._dashline.style.display = '';
       this._label.style.transform = `translate3D(
         ${this._handles[1].screenPosition.x - this._labelOffset.x - this._label.offsetWidth / 2}px,
-        ${this._handles[1].screenPosition.y -
+        ${
+          this._handles[1].screenPosition.y -
           this._labelOffset.y -
           this._label.offsetHeight / 2 -
-          this._container.offsetHeight}px, 0)`;
+          this._container.offsetHeight
+        }px, 0)`;
     }
 
     create() {
@@ -301,9 +305,7 @@ const widgetsAnnotation = (three = window.THREE) => {
         this._handles[1].screenPosition
       );
 
-      this._line.style.transform = `translate3D(${lineData.transformX}px, ${
-        lineData.transformY
-      }px, 0)
+      this._line.style.transform = `translate3D(${lineData.transformX}px, ${lineData.transformY}px, 0)
         rotate(${lineData.transformAngle}rad)`;
       this._line.style.width = lineData.length + 'px';
 
@@ -335,9 +337,7 @@ const widgetsAnnotation = (three = window.THREE) => {
         minLine = line1L;
       }
 
-      this._dashline.style.transform = `translate3D(${minLine.transformX}px, ${
-        minLine.transformY
-      }px, 0)
+      this._dashline.style.transform = `translate3D(${minLine.transformX}px, ${minLine.transformY}px, 0)
         rotate(${minLine.transformAngle}rad)`;
       this._dashline.style.width = minLine.length + 'px';
     }
@@ -352,20 +352,20 @@ const widgetsAnnotation = (three = window.THREE) => {
       this._line.style.display = 'none';
       this._dashline.style.display = 'none';
       this._label.style.display = 'none';
-      this._handles.forEach(elem => elem.hideDOM());
+      this._handles.forEach((elem) => elem.hideDOM());
     }
 
     showDOM() {
       this._line.style.display = '';
       this._dashline.style.display = '';
       this._label.style.display = '';
-      this._handles.forEach(elem => elem.showDOM());
+      this._handles.forEach((elem) => elem.showDOM());
     }
 
     free() {
       this.removeEventListeners();
 
-      this._handles.forEach(h => {
+      this._handles.forEach((h) => {
         this.remove(h);
         h.free();
       });
@@ -407,7 +407,7 @@ const widgetsAnnotation = (three = window.THREE) => {
 
     set targetMesh(targetMesh) {
       this._targetMesh = targetMesh;
-      this._handles.forEach(elem => (elem.targetMesh = targetMesh));
+      this._handles.forEach((elem) => (elem.targetMesh = targetMesh));
       this.update();
     }
 

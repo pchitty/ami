@@ -1,10 +1,12 @@
 import { widgetsBase } from './widgets.base';
 import { widgetsHandle as widgetsHandleFactory } from './widgets.handle';
 
+import * as THREE from "three";
+
 /**
  * @module widgets/ruler
  */
-const widgetsRuler = (three = window.THREE) => {
+const widgetsRuler = (three = THREE) => {
   if (three === undefined || three.Object3D === undefined) {
     return null;
   }
@@ -121,7 +123,7 @@ const widgetsRuler = (three = window.THREE) => {
         this._moveHandle.onMove(evt, true);
 
         if (this._moving) {
-          this._handles.slice(0, -1).forEach(handle => {
+          this._handles.slice(0, -1).forEach((handle) => {
             handle.worldPosition.add(this._moveHandle.worldPosition.clone().sub(prevPosition));
           });
         }
@@ -204,7 +206,7 @@ const widgetsRuler = (three = window.THREE) => {
     hideDOM() {
       this._line.style.display = 'none';
       this._label.style.display = 'none';
-      this._handles.forEach(elem => elem.hideDOM());
+      this._handles.forEach((elem) => elem.hideDOM());
     }
 
     showDOM() {
@@ -259,9 +261,7 @@ const widgetsRuler = (three = window.THREE) => {
         this._handles[1].screenPosition
       );
 
-      this._line.style.transform = `translate3D(${lineData.transformX}px, ${
-        lineData.transformY
-      }px, 0)
+      this._line.style.transform = `translate3D(${lineData.transformX}px, ${lineData.transformY}px, 0)
       rotate(${lineData.transformAngle}rad)`;
       this._line.style.width = lineData.length + 'px';
 
@@ -302,7 +302,7 @@ const widgetsRuler = (three = window.THREE) => {
     free() {
       this.removeEventListeners();
 
-      this._handles.forEach(h => {
+      this._handles.forEach((h) => {
         this.remove(h);
         h.free();
       });
@@ -342,7 +342,7 @@ const widgetsRuler = (three = window.THREE) => {
 
     set targetMesh(targetMesh) {
       this._targetMesh = targetMesh;
-      this._handles.forEach(elem => (elem.targetMesh = targetMesh));
+      this._handles.forEach((elem) => (elem.targetMesh = targetMesh));
       this.update();
     }
 

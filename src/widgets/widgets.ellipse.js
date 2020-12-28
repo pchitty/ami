@@ -2,10 +2,12 @@ import { widgetsBase } from './widgets.base';
 import { widgetsHandle as widgetsHandleFactory } from './widgets.handle';
 import CoreUtils from '../core/core.utils';
 
+import * as THREE from "three";
+
 /**
  * @module widgets/ellipse
  */
-const widgetsEllipse = (three = window.THREE) => {
+const widgetsEllipse = (three = THREE) => {
   if (three === undefined || three.Object3D === undefined) {
     return null;
   }
@@ -131,7 +133,7 @@ const widgetsEllipse = (three = window.THREE) => {
         this._moveHandle.onMove(evt, true);
 
         if (this._moving) {
-          this._handles.slice(0, -1).forEach(handle => {
+          this._handles.slice(0, -1).forEach((handle) => {
             handle.worldPosition.add(this._moveHandle.worldPosition.clone().sub(prevPosition));
           });
         }
@@ -180,7 +182,7 @@ const widgetsEllipse = (three = window.THREE) => {
     }
 
     hideDOM() {
-      this._handles.forEach(elem => elem.hideDOM());
+      this._handles.forEach((elem) => elem.hideDOM());
 
       this._rectangle.style.display = 'none';
       this._ellipse.style.display = 'none';
@@ -265,14 +267,8 @@ const widgetsEllipse = (three = window.THREE) => {
       }
 
       const vec01 = this._handles[1].worldPosition.clone().sub(this._handles[0].worldPosition);
-      const height = vec01
-        .clone()
-        .projectOnVector(this._camera.up)
-        .length();
-      const width = vec01
-        .clone()
-        .projectOnVector(this._camera._right)
-        .length();
+      const height = vec01.clone().projectOnVector(this._camera.up).length();
+      const width = vec01.clone().projectOnVector(this._camera._right).length();
 
       if (width === 0 || height === 0) {
         return;
@@ -389,16 +385,12 @@ const widgetsEllipse = (three = window.THREE) => {
       );
 
       // update rectangle
-      this._rectangle.style.transform = `translate3D(${rectData.transformX}px, ${
-        rectData.transformY
-      }px, 0)`;
+      this._rectangle.style.transform = `translate3D(${rectData.transformX}px, ${rectData.transformY}px, 0)`;
       this._rectangle.style.width = rectData.width + 'px';
       this._rectangle.style.height = rectData.height + 'px';
 
       // update ellipse
-      this._ellipse.style.transform = `translate3D(${rectData.transformX}px, ${
-        rectData.transformY
-      }px, 0)`;
+      this._ellipse.style.transform = `translate3D(${rectData.transformX}px, ${rectData.transformY}px, 0)`;
       this._ellipse.style.width = rectData.width + 'px';
       this._ellipse.style.height = rectData.height + 'px';
 
@@ -410,7 +402,7 @@ const widgetsEllipse = (three = window.THREE) => {
     free() {
       this.removeEventListeners();
 
-      this._handles.forEach(h => {
+      this._handles.forEach((h) => {
         this.remove(h);
         h.free();
       });
@@ -457,7 +449,7 @@ const widgetsEllipse = (three = window.THREE) => {
 
     set targetMesh(targetMesh) {
       this._targetMesh = targetMesh;
-      this._handles.forEach(elem => (elem.targetMesh = targetMesh));
+      this._handles.forEach((elem) => (elem.targetMesh = targetMesh));
       this.update();
     }
 

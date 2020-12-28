@@ -5,11 +5,13 @@ import ShadersFragment from '../shaders/shaders.vr.fragment';
 
 import { helpersMaterialMixin } from '../helpers/helpers.material.mixin';
 
+import * as THREE from "three";
+
 /**
  * @module helpers/volumerendering
  */
 
-const helpersVolumeRendering = (three = window.THREE) => {
+const helpersVolumeRendering = (three = THREE) => {
   if (three === undefined || three.Object3D === undefined) {
     return null;
   }
