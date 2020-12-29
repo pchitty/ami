@@ -1,7 +1,7 @@
 import { widgetsBase } from './widgets.base';
 import { widgetsHandle as widgetsHandleFactory } from './widgets.handle';
 
-import * as THREE from "three";
+import * as THREE from 'three';
 
 /**
  * @module widgets/crossRuler
@@ -115,7 +115,7 @@ const widgetsCrossRuler = (three = THREE) => {
     onStart(evt) {
       this._moveHandle.onMove(evt, true);
 
-      this._handles.slice(0, -1).forEach((elem) => elem.onStart(evt));
+      this._handles.slice(0, -1).forEach(elem => elem.onStart(evt));
 
       this._active =
         this._handles[0].active ||
@@ -140,7 +140,7 @@ const widgetsCrossRuler = (three = THREE) => {
         this._moveHandle.onMove(evt, true);
 
         if (this._moving) {
-          this._handles.slice(0, -1).forEach((handle) => {
+          this._handles.slice(0, -1).forEach(handle => {
             handle.worldPosition.add(this._moveHandle.worldPosition.clone().sub(prevPosition));
           });
         }
@@ -148,7 +148,7 @@ const widgetsCrossRuler = (three = THREE) => {
         this.onHover(null);
       }
 
-      this._handles.slice(0, -1).forEach((elem) => elem.onMove(evt));
+      this._handles.slice(0, -1).forEach(elem => elem.onMove(evt));
 
       if (this._distances) {
         if (this._handles[0].active || this._handles[1].active) {
@@ -254,7 +254,7 @@ const widgetsCrossRuler = (three = THREE) => {
       this._label.style.display = 'none';
       this._label2.style.display = 'none';
 
-      this._handles.slice(0, -1).forEach((elem) => elem.hideDOM());
+      this._handles.slice(0, -1).forEach(elem => elem.hideDOM());
     }
 
     showDOM() {
@@ -263,13 +263,13 @@ const widgetsCrossRuler = (three = THREE) => {
       this._label.style.display = '';
       this._label2.style.display = '';
 
-      this._handles.slice(0, -1).forEach((elem) => elem.showDOM());
+      this._handles.slice(0, -1).forEach(elem => elem.showDOM());
     }
 
     update() {
       this.updateColor();
 
-      this._handles.slice(0, -1).forEach((elem) => elem.update());
+      this._handles.slice(0, -1).forEach(elem => elem.update());
 
       this.updateMeshColor();
       this.updateMeshPosition();
@@ -298,7 +298,9 @@ const widgetsCrossRuler = (three = THREE) => {
         this._handles[1].screenPosition
       );
 
-      this._line.style.transform = `translate3D(${lineData.transformX}px, ${lineData.transformY}px, 0)
+      this._line.style.transform = `translate3D(${lineData.transformX}px, ${
+        lineData.transformY
+      }px, 0)
             rotate(${lineData.transformAngle}rad)`;
       this._line.style.width = lineData.length + 'px';
 
@@ -308,7 +310,9 @@ const widgetsCrossRuler = (three = THREE) => {
         this._handles[3].screenPosition
       );
 
-      this._line2.style.transform = `translate3D(${line2Data.transformX}px, ${line2Data.transformY}px, 0)
+      this._line2.style.transform = `translate3D(${line2Data.transformX}px, ${
+        line2Data.transformY
+      }px, 0)
             rotate(${line2Data.transformAngle}rad)`;
       this._line2.style.width = line2Data.length + 'px';
 
@@ -402,7 +406,7 @@ const widgetsCrossRuler = (three = THREE) => {
     free() {
       this.removeEventListeners();
 
-      this._handles.forEach((h) => {
+      this._handles.forEach(h => {
         this.remove(h);
         h.free();
       });
@@ -433,7 +437,10 @@ const widgetsCrossRuler = (three = THREE) => {
 
     initLineAndNormal() {
       this._line01 = this._handles[1].worldPosition.clone().sub(this._handles[0].worldPosition);
-      this._normal = this._line01.clone().cross(this._camera._direction).normalize();
+      this._normal = this._line01
+        .clone()
+        .cross(this._camera._direction)
+        .normalize();
     }
 
     initOrtho() {
@@ -460,9 +467,12 @@ const widgetsCrossRuler = (three = THREE) => {
       this._distances[0] *= this._line01.length() / (this._distances[0] + this._distances[1]);
       this._distances[1] = this._line01.length() - this._distances[0];
 
-      const intersect = this._handles[0].worldPosition
-        .clone()
-        .add(this._line01.clone().normalize().multiplyScalar(this._distances[0]));
+      const intersect = this._handles[0].worldPosition.clone().add(
+        this._line01
+          .clone()
+          .normalize()
+          .multiplyScalar(this._distances[0])
+      );
 
       this._handles[2].worldPosition.copy(
         intersect.clone().add(this._normal.clone().multiplyScalar(this._distances[2]))
@@ -486,7 +496,10 @@ const widgetsCrossRuler = (three = THREE) => {
       ).closestPointToPoint(this._handles[activeInd].worldPosition, intersect);
 
       const isOutside =
-        intersect.clone().sub(this._handles[0].worldPosition).length() > this._line01.length();
+        intersect
+          .clone()
+          .sub(this._handles[0].worldPosition)
+          .length() > this._line01.length();
       // if intersection is outside of the line01 then change worldPosition of active handle
       if (isOutside || intersect.equals(this._handles[0].worldPosition)) {
         if (isOutside) {
@@ -591,7 +604,7 @@ const widgetsCrossRuler = (three = THREE) => {
 
     set targetMesh(targetMesh) {
       this._targetMesh = targetMesh;
-      this._handles.forEach((elem) => (elem.targetMesh = targetMesh));
+      this._handles.forEach(elem => (elem.targetMesh = targetMesh));
       this.update();
     }
 
@@ -600,7 +613,7 @@ const widgetsCrossRuler = (three = THREE) => {
     }
 
     set worldPosition(worldPosition) {
-      this._handles.slice(0, -1).forEach((elem) => elem.worldPosition.copy(worldPosition));
+      this._handles.slice(0, -1).forEach(elem => elem.worldPosition.copy(worldPosition));
       this._worldPosition.copy(worldPosition);
       this.update();
     }

@@ -2,7 +2,7 @@ import { widgetsBase } from './widgets.base';
 import { widgetsHandle as widgetsHandleFactory } from './widgets.handle';
 import CoreUtils from '../core/core.utils';
 
-import * as THREE from "three";
+import * as THREE from 'three';
 
 /**
  * @module widgets/peakVelocity (Gradient)
@@ -217,9 +217,8 @@ const widgetsPeakVelocity = (three = THREE) => {
       // position
       const transform = this.adjustLabelTransform(this._label, this._handle.screenPosition, true);
 
-      this._line.style.transform = `translate3D(${
-        transform.x - (point.x - region.x0) * this._camera.zoom
-      }px, ${transform.y}px, 0)`;
+      this._line.style.transform = `translate3D(${transform.x -
+        (point.x - region.x0) * this._camera.zoom}px, ${transform.y}px, 0)`;
       this._line.style.width = (region.x1 - region.x0) * this._camera.zoom + 'px';
       this._label.style.transform = `translate3D(${transform.x + 10}px, ${transform.y + 10}px, 0)`;
     }

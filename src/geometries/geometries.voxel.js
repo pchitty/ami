@@ -2,7 +2,7 @@
  *
  * @module geometries/voxel
  */
-import * as THREE from "three";
+import * as THREE from 'three';
 
 const geometriesVoxel = (three = THREE) => {
   if (three === undefined || three.BoxGeometry === undefined) {

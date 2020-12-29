@@ -1,7 +1,7 @@
 import { widgetsBase } from './widgets.base';
 import CoreIntersections from '../core/core.intersections';
 
-import * as THREE from "three";
+import * as THREE from 'three';
 
 /**
  * @module widgets/handle

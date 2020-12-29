@@ -1,7 +1,7 @@
 import Intersections from '../core/core.intersections';
 import Validators from '../core/core.validators';
 
-import * as THREE from "three";
+import * as THREE from 'three';
 
 /**
  * Orthographic camera from THREE.JS with some extra convenience
@@ -375,7 +375,7 @@ const camerasOrthographic = (three = THREE) => {
         rotationToApply *= -1;
         this._angle += 90;
       } else {
-        rotationToApply = 360 -  (angle - this._angle);
+        rotationToApply = 360 - (angle - this._angle);
         this._angle = angle;
       }
 

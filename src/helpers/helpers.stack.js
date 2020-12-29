@@ -3,7 +3,7 @@ import { helpersBorder } from '../helpers/helpers.border';
 import { helpersBoundingBox } from '../helpers/helpers.boundingbox';
 import { helpersSlice } from '../helpers/helpers.slice';
 
-import * as THREE from "three";
+import * as THREE from 'three';
 
 /**
  * Helper to easily display and interact with a stack.<br>

@@ -5,6 +5,8 @@ import HelpersLut        from '../../src/helpers/helpers.lut';
 import LoadersVolume     from '../../src/loaders/loaders.volume';
 import ShadersRaycasting from '../../src/shaders/shaders.raycasting';
 
+import * as THREE from 'three';
+
 let glslify = require('glslify');
 
 // standard global letiables

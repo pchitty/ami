@@ -4,7 +4,7 @@
  * @author Patrick Fuller / http://patrick-fuller.com
  * @author Max Smolens / https://github.com/msmolens
  */
-import * as THREE from "three";
+import * as THREE from 'three';
 
 const trackballOrtho = (three = THREE) => {
   if (three === undefined || three.EventDispatcher === undefined) {
@@ -91,7 +91,7 @@ const trackballOrtho = (three = THREE) => {
 
       // methods
 
-      this.handleResize = function () {
+      this.handleResize = function() {
         if (this.domElement === document) {
           this.screen.left = 0;
           this.screen.top = 0;
@@ -115,13 +115,13 @@ const trackballOrtho = (three = THREE) => {
         this.bottom0 = this.object.bottom;
       };
 
-      this.handleEvent = function (event) {
+      this.handleEvent = function(event) {
         if (typeof this[event.type] == 'function') {
           this[event.type](event);
         }
       };
 
-      let getMouseOnScreen = (function () {
+      let getMouseOnScreen = (function() {
         let vector = new three.Vector2();
 
         return function getMouseOnScreen(pageX, pageY) {
@@ -134,7 +134,7 @@ const trackballOrtho = (three = THREE) => {
         };
       })();
 
-      this.zoomCamera = function () {
+      this.zoomCamera = function() {
         if (_state === STATE.TOUCH_ZOOM_PAN) {
           var factor = _touchZoomDistanceEnd / _touchZoomDistanceStart;
           _touchZoomDistanceStart = _touchZoomDistanceEnd;
@@ -159,7 +159,7 @@ const trackballOrtho = (three = THREE) => {
         }
       };
 
-      this.panCamera = (function () {
+      this.panCamera = (function() {
         let mouseChange = new three.Vector2(),
           objectUp = new three.Vector3(),
           pan = new three.Vector3();
@@ -174,7 +174,10 @@ const trackballOrtho = (three = THREE) => {
             mouseChange.x *= scale_x;
             mouseChange.y *= scale_y;
 
-            pan.copy(_eye).cross(_this.object.up).setLength(mouseChange.x);
+            pan
+              .copy(_eye)
+              .cross(_this.object.up)
+              .setLength(mouseChange.x);
             pan.add(objectUp.copy(_this.object.up).setLength(mouseChange.y));
 
             _this.object.position.add(pan);
@@ -195,7 +198,7 @@ const trackballOrtho = (three = THREE) => {
         };
       })();
 
-      this.update = function () {
+      this.update = function() {
         _eye.subVectors(_this.object.position, _this.target);
 
         if (!_this.noZoom) {
@@ -221,7 +224,7 @@ const trackballOrtho = (three = THREE) => {
         }
       };
 
-      this.reset = function () {
+      this.reset = function() {
         _state = STATE.NONE;
         _prevState = STATE.NONE;
 
@@ -422,7 +425,7 @@ const trackballOrtho = (three = THREE) => {
         event.preventDefault();
       }
 
-      this.dispose = function () {
+      this.dispose = function() {
         this.domElement.removeEventListener('contextmenu', contextmenu, false);
         this.domElement.removeEventListener('mousedown', mousedown, false);
         this.domElement.removeEventListener('wheel', mousewheel, false);

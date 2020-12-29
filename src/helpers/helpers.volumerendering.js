@@ -5,7 +5,7 @@ import ShadersFragment from '../shaders/shaders.vr.fragment';
 
 import { helpersMaterialMixin } from '../helpers/helpers.material.mixin';
 
-import * as THREE from "three";
+import * as THREE from 'three';
 
 /**
  * @module helpers/volumerendering

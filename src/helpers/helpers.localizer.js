@@ -3,7 +3,7 @@ import ShadersUniform from '../shaders/shaders.localizer.uniform';
 import ShadersVertex from '../shaders/shaders.localizer.vertex';
 import ShadersFragment from '../shaders/shaders.localizer.fragment';
 
-import * as THREE from "three";
+import * as THREE from 'three';
 
 /**
  * @module helpers/localizer

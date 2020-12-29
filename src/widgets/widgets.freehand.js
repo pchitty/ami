@@ -2,7 +2,7 @@ import { widgetsBase } from './widgets.base';
 import { widgetsHandle as widgetsHandleFactory } from './widgets.handle';
 import CoreUtils from '../core/core.utils';
 
-import * as THREE from "three";
+import * as THREE from 'three';
 
 /**
  * @module widgets/freehand
@@ -86,7 +86,7 @@ const widgetsFreehand = (three = THREE) => {
 
       let hovered = false;
 
-      this._handles.forEach((elem) => (hovered = hovered || elem.hovered));
+      this._handles.forEach(elem => (hovered = hovered || elem.hovered));
 
       this._hovered = hovered || this._domHovered;
       this._container.style.cursor = this._hovered ? 'pointer' : 'default';
@@ -104,7 +104,7 @@ const widgetsFreehand = (three = THREE) => {
       let active = false;
 
       this._moveHandle.onMove(evt, true);
-      this._handles.forEach((elem) => {
+      this._handles.forEach(elem => {
         elem.onStart(evt);
         active = active || elem.active;
       });
@@ -149,14 +149,14 @@ const widgetsFreehand = (three = THREE) => {
           }
           this.updateDOMContent(true);
           if (this._moving) {
-            this._handles.forEach((handle) => {
+            this._handles.forEach(handle => {
               handle.worldPosition.add(this._moveHandle.worldPosition.clone().sub(prevPosition));
             });
           }
         }
       }
 
-      this._handles.forEach((elem) => {
+      this._handles.forEach(elem => {
         elem.onMove(evt);
         hovered = hovered || elem.hovered;
       });
@@ -178,7 +178,7 @@ const widgetsFreehand = (three = THREE) => {
 
       let active = false;
 
-      this._handles.slice(0, -1).forEach((elem) => {
+      this._handles.slice(0, -1).forEach(elem => {
         elem.onEnd();
         active = active || elem.active;
       });
@@ -202,7 +202,7 @@ const widgetsFreehand = (three = THREE) => {
 
       if (!this._dragged && this._active) {
         this._selected = !this._selected; // change state if there was no dragging
-        this._handles.forEach((elem) => (elem.selected = this._selected));
+        this._handles.forEach(elem => (elem.selected = this._selected));
       }
       this._active = active || this._handles[this._handles.length - 1].active;
       this._dragged = false;
@@ -260,16 +260,16 @@ const widgetsFreehand = (three = THREE) => {
     }
 
     hideDOM() {
-      this._handles.forEach((elem) => elem.hideDOM());
+      this._handles.forEach(elem => elem.hideDOM());
 
-      this._lines.forEach((elem) => (elem.style.display = 'none'));
+      this._lines.forEach(elem => (elem.style.display = 'none'));
       this._label.style.display = 'none';
     }
 
     showDOM() {
-      this._handles.forEach((elem) => elem.showDOM());
+      this._handles.forEach(elem => elem.showDOM());
 
-      this._lines.forEach((elem) => (elem.style.display = ''));
+      this._lines.forEach(elem => (elem.style.display = ''));
       this._label.style.display = '';
     }
 
@@ -277,7 +277,7 @@ const widgetsFreehand = (three = THREE) => {
       this.updateColor();
 
       // update handles
-      this._handles.forEach((elem) => elem.update());
+      this._handles.forEach(elem => elem.update());
 
       // mesh stuff
       this.updateMeshColor();
@@ -295,7 +295,7 @@ const widgetsFreehand = (three = THREE) => {
 
       let points = [];
 
-      this._handles.forEach((elem) => points.push(elem.worldPosition));
+      this._handles.forEach(elem => points.push(elem.worldPosition));
 
       let center = CoreUtils.centerOfMass(points);
       // direction from first point to center
@@ -323,7 +323,7 @@ const widgetsFreehand = (three = THREE) => {
       // override to catch console.warn "THREE.ShapeUtils: Unable to triangulate polygon! in triangulate()"
       this._shapeWarn = false;
       const oldWarn = console.warn;
-      console.warn = function (...rest) {
+      console.warn = function(...rest) {
         if (rest[0] === 'three.ShapeUtils: Unable to triangulate polygon! in triangulate()') {
           this._shapeWarn = true;
         }
@@ -403,7 +403,7 @@ const widgetsFreehand = (three = THREE) => {
 
     updateDOMColor() {
       if (this._handles.length >= 2) {
-        this._lines.forEach((elem) => (elem.style.backgroundColor = this._color));
+        this._lines.forEach(elem => (elem.style.backgroundColor = this._color));
       }
       this._label.style.borderColor = this._color;
     }
@@ -431,7 +431,7 @@ const widgetsFreehand = (three = THREE) => {
         let cRegion;
         let pRegion;
 
-        this._handles.forEach((elem) => {
+        this._handles.forEach(elem => {
           cRegion = this.getRegionByXY(
             regions,
             CoreUtils.worldToData(this._stack.lps2IJK, elem.worldPosition)
@@ -521,7 +521,7 @@ const widgetsFreehand = (three = THREE) => {
     free() {
       this.removeEventListeners();
 
-      this._handles.forEach((h) => {
+      this._handles.forEach(h => {
         this.remove(h);
         h.free();
       });
@@ -531,7 +531,7 @@ const widgetsFreehand = (three = THREE) => {
       this._moveHandle.free();
       this._moveHandle = null;
 
-      this._lines.forEach((elem) => {
+      this._lines.forEach(elem => {
         elem.removeEventListener('mouseenter', this.onHover);
         elem.removeEventListener('mouseleave', this.onHover);
         this._container.removeChild(elem);
@@ -576,7 +576,7 @@ const widgetsFreehand = (three = THREE) => {
 
     set targetMesh(targetMesh) {
       this._targetMesh = targetMesh;
-      this._handles.forEach((elem) => (elem.targetMesh = targetMesh));
+      this._handles.forEach(elem => (elem.targetMesh = targetMesh));
       this._moveHandle.targetMesh = targetMesh;
       this.update();
     }
@@ -586,7 +586,7 @@ const widgetsFreehand = (three = THREE) => {
     }
 
     set worldPosition(worldPosition) {
-      this._handles.forEach((elem) => elem._worldPosition.copy(worldPosition));
+      this._handles.forEach(elem => elem._worldPosition.copy(worldPosition));
       this._worldPosition.copy(worldPosition);
       this.update();
     }

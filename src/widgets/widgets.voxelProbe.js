@@ -3,7 +3,7 @@ import { widgetsHandle as widgetsHandleFactory } from './widgets.handle';
 import ModelsVoxel from '../models/models.voxel';
 import CoreUtils from '../core/core.utils';
 
-import * as THREE from "three";
+import * as THREE from 'three';
 
 /**
  * @module widgets/voxelProbe

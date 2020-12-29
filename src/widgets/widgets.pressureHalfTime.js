@@ -2,7 +2,7 @@ import { widgetsBase } from './widgets.base';
 import { widgetsHandle as widgetsHandleFactory } from './widgets.handle';
 import CoreUtils from '../core/core.utils';
 
-import * as THREE from "three";
+import * as THREE from 'three';
 
 /**
  * @module widgets/pressureHalfTime
@@ -144,7 +144,7 @@ const widgetsPressureHalfTime = (three = THREE) => {
         }
 
         if (!this._handles[0].active && !this._handles[1].active) {
-          this._handles.slice(0, -1).forEach((handle) => {
+          this._handles.slice(0, -1).forEach(handle => {
             handle.worldPosition.add(shift);
           });
         }
@@ -250,7 +250,7 @@ const widgetsPressureHalfTime = (three = THREE) => {
 
       const measurementsContainer = document.createElement('div');
 
-      ['vmax', 'gmax', 'pht', 'mva', 'dt', 'ds'].forEach((name) => {
+      ['vmax', 'gmax', 'pht', 'mva', 'dt', 'ds'].forEach(name => {
         const div = document.createElement('div');
 
         div.className = name;
@@ -266,7 +266,7 @@ const widgetsPressureHalfTime = (three = THREE) => {
     hideDOM() {
       this._line.style.display = 'none';
       this._label.style.display = 'none';
-      this._handles.forEach((elem) => elem.hideDOM());
+      this._handles.forEach(elem => elem.hideDOM());
     }
 
     showDOM() {
@@ -345,7 +345,9 @@ const widgetsPressureHalfTime = (three = THREE) => {
         this._handles[1].screenPosition
       );
 
-      this._line.style.transform = `translate3D(${lineData.transformX}px, ${lineData.transformY}px, 0)
+      this._line.style.transform = `translate3D(${lineData.transformX}px, ${
+        lineData.transformY
+      }px, 0)
                 rotate(${lineData.transformAngle}rad)`;
       this._line.style.width = lineData.length + 'px';
 
@@ -385,7 +387,7 @@ const widgetsPressureHalfTime = (three = THREE) => {
     free() {
       this.removeEventListeners();
 
-      this._handles.forEach((h) => {
+      this._handles.forEach(h => {
         this.remove(h);
         h.free();
       });
@@ -429,7 +431,7 @@ const widgetsPressureHalfTime = (three = THREE) => {
 
     set targetMesh(targetMesh) {
       this._targetMesh = targetMesh;
-      this._handles.forEach((elem) => (elem.targetMesh = targetMesh));
+      this._handles.forEach(elem => (elem.targetMesh = targetMesh));
       this.update();
     }
 

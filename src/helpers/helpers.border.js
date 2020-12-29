@@ -1,7 +1,7 @@
 /**
  * @module helpers/border
  */
-import * as THREE from "three";
+import * as THREE from 'three';
 
 const helpersBorder = (three = THREE) => {
   if (three === undefined || three.Object3D === undefined) {

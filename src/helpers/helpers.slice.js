@@ -6,7 +6,7 @@ import ShadersFragment from '../shaders/shaders.data.fragment';
 
 import { helpersMaterialMixin } from '../helpers/helpers.material.mixin';
 
-import * as THREE from "three";
+import * as THREE from 'three';
 
 /**
  * @module helpers/slice
@@ -562,7 +562,10 @@ const helpersSlice = (three = THREE) => {
       );
       let v1 = new three.Vector3();
       let v2 = new three.Vector3();
-      let normal = v1.subVectors(p3, p2).cross(v2.subVectors(p1, p2)).normalize();
+      let normal = v1
+        .subVectors(p3, p2)
+        .cross(v2.subVectors(p1, p2))
+        .normalize();
 
       return new three.Vector4(normal.x, normal.y, normal.z, -normal.dot(p1));
     }

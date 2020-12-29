@@ -2,7 +2,7 @@ import { widgetsBase } from './widgets.base';
 import { widgetsHandle as widgetsHandleFactory } from './widgets.handle';
 import CoreUtils from '../core/core.utils';
 
-import * as THREE from "three";
+import * as THREE from 'three';
 
 /**
  * @module widgets/polygon
@@ -90,7 +90,7 @@ const widgetsPolygon = (three = THREE) => {
 
       let hovered = false;
 
-      this._handles.forEach((elem) => (hovered = hovered || elem.hovered));
+      this._handles.forEach(elem => (hovered = hovered || elem.hovered));
 
       this._hovered = hovered || this._domHovered;
       this._container.style.cursor = this._hovered ? 'pointer' : 'default';
@@ -107,7 +107,7 @@ const widgetsPolygon = (three = THREE) => {
     onStart(evt) {
       let active = false;
 
-      this._handles.forEach((elem) => {
+      this._handles.forEach(elem => {
         elem.onStart(evt);
         active = active || elem.active;
       });
@@ -158,14 +158,14 @@ const widgetsPolygon = (three = THREE) => {
           }
           this.updateDOMContent(true);
           if (this._moving) {
-            this._handles.forEach((handle) => {
+            this._handles.forEach(handle => {
               handle.worldPosition.add(this._moveHandle.worldPosition.clone().sub(prevPosition));
             });
           }
         }
       }
 
-      this._handles.forEach((elem) => {
+      this._handles.forEach(elem => {
         elem.onMove(evt);
         hovered = hovered || elem.hovered;
       });
@@ -190,7 +190,7 @@ const widgetsPolygon = (three = THREE) => {
         return;
       }
 
-      this._handles.forEach((elem) => {
+      this._handles.forEach(elem => {
         elem.onEnd();
         active = active || elem.active;
       });
@@ -208,7 +208,7 @@ const widgetsPolygon = (three = THREE) => {
 
       if (!this._dragged && this._active) {
         this._selected = !this._selected; // change state if there was no dragging
-        this._handles.forEach((elem) => (elem.selected = this._selected));
+        this._handles.forEach(elem => (elem.selected = this._selected));
       }
       this._active = active || this._handles[numHandles - 1].active;
       this._dragged = false;
@@ -232,7 +232,7 @@ const widgetsPolygon = (three = THREE) => {
       }
 
       this._handles[numHandles - 1].tracking = false;
-      this._handles.forEach((elem) => elem.onEnd());
+      this._handles.forEach(elem => elem.onEnd());
 
       this._active = false;
       this._dragged = false;
@@ -294,16 +294,16 @@ const widgetsPolygon = (three = THREE) => {
     }
 
     hideDOM() {
-      this._handles.forEach((elem) => elem.hideDOM());
+      this._handles.forEach(elem => elem.hideDOM());
 
-      this._lines.forEach((elem) => (elem.style.display = 'none'));
+      this._lines.forEach(elem => (elem.style.display = 'none'));
       this._label.style.display = 'none';
     }
 
     showDOM() {
-      this._handles.forEach((elem) => elem.showDOM());
+      this._handles.forEach(elem => elem.showDOM());
 
-      this._lines.forEach((elem) => (elem.style.display = ''));
+      this._lines.forEach(elem => (elem.style.display = ''));
       this._label.style.display = '';
     }
 
@@ -311,7 +311,7 @@ const widgetsPolygon = (three = THREE) => {
       this.updateColor();
 
       // update handles
-      this._handles.forEach((elem) => elem.update());
+      this._handles.forEach(elem => elem.update());
 
       // mesh stuff
       this.updateMeshColor();
@@ -329,7 +329,7 @@ const widgetsPolygon = (three = THREE) => {
 
       let points = [];
 
-      this._handles.forEach((elem) => points.push(elem.worldPosition));
+      this._handles.forEach(elem => points.push(elem.worldPosition));
 
       let center = CoreUtils.centerOfMass(points);
       // direction from first point to center
@@ -359,7 +359,7 @@ const widgetsPolygon = (three = THREE) => {
       // override to catch console.warn "THREE.ShapeUtils: Unable to triangulate polygon! in triangulate()"
       this._shapeWarn = false;
       const oldWarn = console.warn;
-      console.warn = function (...rest) {
+      console.warn = function(...rest) {
         if (rest[0] === 'THREE.ShapeUtils: Unable to triangulate polygon! in triangulate()') {
           this._shapeWarn = true;
         }
@@ -408,7 +408,7 @@ const widgetsPolygon = (three = THREE) => {
     }
 
     updateDOMColor() {
-      this._lines.forEach((elem) => (elem.style.backgroundColor = this._color));
+      this._lines.forEach(elem => (elem.style.backgroundColor = this._color));
       this._label.style.borderColor = this._color;
     }
 
@@ -435,7 +435,7 @@ const widgetsPolygon = (three = THREE) => {
         let cRegion;
         let pRegion;
 
-        this._handles.forEach((elem) => {
+        this._handles.forEach(elem => {
           cRegion = this.getRegionByXY(
             regions,
             CoreUtils.worldToData(this._stack.lps2IJK, elem.worldPosition)
@@ -522,7 +522,7 @@ const widgetsPolygon = (three = THREE) => {
     free() {
       this.removeEventListeners();
 
-      this._handles.forEach((h) => {
+      this._handles.forEach(h => {
         this.remove(h);
         h.free();
       });
@@ -532,7 +532,7 @@ const widgetsPolygon = (three = THREE) => {
       this._moveHandle.free();
       this._moveHandle = null;
 
-      this._lines.forEach((elem) => {
+      this._lines.forEach(elem => {
         elem.removeEventListener('mouseenter', this.onHover);
         elem.removeEventListener('mouseleave', this.onHover);
         this._container.removeChild(elem);
@@ -577,7 +577,7 @@ const widgetsPolygon = (three = THREE) => {
 
     set targetMesh(targetMesh) {
       this._targetMesh = targetMesh;
-      this._handles.forEach((elem) => (elem.targetMesh = targetMesh));
+      this._handles.forEach(elem => (elem.targetMesh = targetMesh));
       this._moveHandle.targetMesh = targetMesh;
       this.update();
     }
@@ -587,7 +587,7 @@ const widgetsPolygon = (three = THREE) => {
     }
 
     set worldPosition(worldPosition) {
-      this._handles.forEach((elem) => elem.worldPosition.copy(worldPosition));
+      this._handles.forEach(elem => elem.worldPosition.copy(worldPosition));
       this._worldPosition.copy(worldPosition);
       this.update();
     }

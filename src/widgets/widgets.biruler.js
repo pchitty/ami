@@ -1,7 +1,7 @@
 import { widgetsBase } from './widgets.base';
 import { widgetsHandle as widgetsHandleFactory } from './widgets.handle';
 
-import * as THREE from "three";
+import * as THREE from 'three';
 
 /**
  * @module widgets/biruler
@@ -68,7 +68,7 @@ const widgetsBiruler = (three = THREE) => {
     }
 
     onStart(evt) {
-      this._handles.forEach((elem) => elem.onStart(evt));
+      this._handles.forEach(elem => elem.onStart(evt));
 
       this._active =
         this._handles[0].active ||
@@ -91,7 +91,7 @@ const widgetsBiruler = (three = THREE) => {
         this._container.style.cursor = this._hovered ? 'pointer' : 'default';
       }
 
-      this._handles.forEach((elem) => elem.onMove(evt));
+      this._handles.forEach(elem => elem.onMove(evt));
 
       this.update();
     }
@@ -199,7 +199,7 @@ const widgetsBiruler = (three = THREE) => {
       this._label2.style.display = 'none';
       this._dashline.style.display = 'none';
 
-      this._handles.forEach((elem) => elem.hideDOM());
+      this._handles.forEach(elem => elem.hideDOM());
     }
 
     showDOM() {
@@ -209,13 +209,13 @@ const widgetsBiruler = (three = THREE) => {
       this._label2.style.display = '';
       this._dashline.style.display = '';
 
-      this._handles.forEach((elem) => elem.showDOM());
+      this._handles.forEach(elem => elem.showDOM());
     }
 
     update() {
       this.updateColor();
 
-      this._handles.forEach((elem) => elem.update());
+      this._handles.forEach(elem => elem.update());
 
       this.updateMeshColor();
       this.updateMeshPosition();
@@ -244,7 +244,9 @@ const widgetsBiruler = (three = THREE) => {
         this._handles[1].screenPosition
       );
 
-      this._line.style.transform = `translate3D(${lineData.transformX}px, ${lineData.transformY}px, 0)
+      this._line.style.transform = `translate3D(${lineData.transformX}px, ${
+        lineData.transformY
+      }px, 0)
                 rotate(${lineData.transformAngle}rad)`;
       this._line.style.width = lineData.length + 'px';
 
@@ -254,7 +256,9 @@ const widgetsBiruler = (three = THREE) => {
         this._handles[3].screenPosition
       );
 
-      this._line2.style.transform = `translate3D(${line2Data.transformX}px, ${line2Data.transformY}px, 0)
+      this._line2.style.transform = `translate3D(${line2Data.transformX}px, ${
+        line2Data.transformY
+      }px, 0)
                 rotate(${line2Data.transformAngle}rad)`;
       this._line2.style.width = line2Data.length + 'px';
 
@@ -272,7 +276,9 @@ const widgetsBiruler = (three = THREE) => {
         this.worldToScreen(line2Center)
       );
 
-      this._dashline.style.transform = `translate3D(${dashLineData.transformX}px, ${dashLineData.transformY}px, 0)
+      this._dashline.style.transform = `translate3D(${dashLineData.transformX}px, ${
+        dashLineData.transformY
+      }px, 0)
                 rotate(${dashLineData.transformAngle}rad)`;
       this._dashline.style.width = dashLineData.length + 'px';
 
@@ -369,7 +375,7 @@ const widgetsBiruler = (three = THREE) => {
     free() {
       this.removeEventListeners();
 
-      this._handles.forEach((h) => {
+      this._handles.forEach(h => {
         this.remove(h);
         h.free();
       });
@@ -414,7 +420,7 @@ const widgetsBiruler = (three = THREE) => {
 
     set targetMesh(targetMesh) {
       this._targetMesh = targetMesh;
-      this._handles.forEach((elem) => (elem.targetMesh = targetMesh));
+      this._handles.forEach(elem => (elem.targetMesh = targetMesh));
       this.update();
     }
 
@@ -423,7 +429,7 @@ const widgetsBiruler = (three = THREE) => {
     }
 
     set worldPosition(worldPosition) {
-      this._handles.forEach((elem) => elem.worldPosition.copy(worldPosition));
+      this._handles.forEach(elem => elem.worldPosition.copy(worldPosition));
       this._worldPosition.copy(worldPosition);
       this.update();
     }

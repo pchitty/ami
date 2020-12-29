@@ -1,7 +1,7 @@
 /**
  * @module helpers/boundingbox
  */
-import * as THREE from "three";
+import * as THREE from 'three';
 
 const helpersBoundingBox = (three = THREE) => {
   if (three === undefined || three.Object3D === undefined) {
